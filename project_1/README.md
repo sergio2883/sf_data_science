@@ -1,34 +1,29 @@
- # Проект 0. Угадай число
+ # Проект 1. Крестики-нолики
 
  ## Оглавление
- [1. Описание проекта](https://github.com/sergio2883/sf_data_science/tree/main/project_0/README.md#Описание-проекта) 
- [2. Какой кейс решаем?](https://github.com/sergio2883/sf_data_science/tree/main/project_0/README.md#Какой-кейс-решаем)
- [3. Краткая информация о данных](https://github.com/sergio2883/sf_data_science/tree/main/project_0/README.md#Краткая-информация-о-данных)
- [4. Этапы работы над проектом](https://github.com/sergio2883/sf_data_science/tree/main/project_0/README.md#Этапы-работы-над-проектом) 
- [5. Результат](https://github.com/sergio2883/sf_data_science/tree/main/project_0/README.md#Результат)
- [6. Выводы](https://github.com/sergio2883/sf_data_science/tree/main/project_0/README.md#Выводы)
+ [1. Описание проекта](https://github.com/sergio2883/sf_data_science/tree/main/project_1/README.md#Описание-проекта) 
+ [2. Какой кейс решаем?](https://github.com/sergio2883/sf_data_science/tree/main/project_1/README.md#Какой-кейс-решаем)
+ [3. Краткая информация о данных](https://github.com/sergio2883/sf_data_science/tree/main/project_1/README.md#Краткая-информация-о-данных)
+ [4. Этапы работы над проектом](https://github.com/sergio2883/sf_data_science/tree/main/project_1/README.md#Этапы-работы-над-проектом) 
+ [5. Результат](https://github.com/sergio2883/sf_data_science/tree/main/project_1/README.md#Результат)
+ [6. Выводы](https://github.com/sergio2883/sf_data_science/tree/main/project_1/README.md#Выводы)
 
 ### Описание проекта
-Угадать загаданное компьютером число за минимальное число попыток.
+Создать игру "Крестики-нолики" с размером игрового поля 3х3.
 
-:arrow_up:[к оглавлению](https://github.com/sergio2883/sf_data_science/tree/main/project_0/README.md#Оглавление)
+:arrow_up:[к оглавлению](https://github.com/sergio2883/sf_data_science/tree/main/project_1/README.md#Оглавление)
 
 
 ### Какой кейс решаем?
-Нужно написать программу, которая угадывает число за минимальное число попыток
+Нужно написать программу, реализующую игру "Крестики-нолики"
 
 **Условия соревнования**
-- Компьютер загадывает целое число от 0 до 100 и нам его надо угадать. Под "угадать" подразумевается "написать программу, которая угадывет число".
-- Алгоритм учитывает информацию о том, больше ли случайное число или меньше нужного нам.
-
-**Метрика качества**
-Результаты оцениваются по среднему количеству попыток при 1000 повторений
+- На игровом поле размером 3х3 клетки необходимо построить линию из трех крестиков или ноликов.
+- Первым всегда ходит крестик.
+- Клетку, в которую ставится крестик или нолик, необходимо ввести в формате (строка пробел столбец).
+- Побеждает тот игрок, который первым построит линию из трех своих символов.
 
 **Что практикуем**
 Учимся писать хороший код на python
 
-
-### Краткая информация о данных
-...
-
-:arrow_up:[к оглавлению](https://github.com/sergio2883/sf_data_science/tree/main/project_0/README.md#Оглавление)
+:arrow_up:[к оглавлению](https://github.com/sergio2883/sf_data_science/tree/main/project_1/README.md#Оглавление)
