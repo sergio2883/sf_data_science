@@ -21,8 +21,7 @@ class CurrencyConverter:
         if base == quote:
             raise APIException("одинаковые валюты")
             #raise APIException("Нельзя переводить одинаковые валюты.")
-        
-                     
+                    
         try:
             base_ticker = currencies[base]
         except KeyError:
