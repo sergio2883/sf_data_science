@@ -40,7 +40,8 @@ class CurrencyConverter:
             raise APIException(f"неверное число {amount}")
             #raise APIException(f"Не удалось обработать количество {amount}")
             
-        url = f"https://api.exchangerate-api.com/v4/latest/{base_ticker}"
+        #url = f"https://api.exchangerate-api.com/v4/latest/{base_ticker}"
+        url = f"http://api.currencylayer.com/live/{base_ticker}"
         response = requests.get(url)
         data = json.loads(response.text)
         rate = data["rates"][quote_ticker]
