@@ -1,3 +1,8 @@
+<<<<<<< HEAD
 vk_api
 requests
+=======
+vk_api
+requests
+>>>>>>> b12ce3199b0ac3e84466c9bfa0285812bebac9bd
 python-dotenv
