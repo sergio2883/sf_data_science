@@ -1,0 +1,174 @@
+import pandas as pd
+melb_df = pd.read_csv('D:\IDE\github\sf_data_science\PY_17_Pandas_Intro\data\melb_data_ps.csv', sep=',')
+print(melb_df.info())
+# melb_df = melb_data.copy()
+# #print(melb_df.head())
+# melb_df['Date'] = pd.to_datetime(melb_df['Date'], dayfirst=True)
+# #print(melb_df['Date'])
+# # delta_days = melb_df['Date'] - pd.to_datetime('2016-01-01') 
+# # print(delta_days)
+# # melb_df['AgeBuilding'] = melb_df['Date'].dt.year - melb_df['YearBuilt']
+# # print(melb_df['AgeBuilding'])
+
+# # Преобразование столбца с датой в datetime
+# # В датасете Melbourne Housing столбец с датой обычно называется 'Date'
+# melb_df['Date'] = pd.to_datetime(melb_df['Date'], dayfirst=True)
+
+# # # Создание признака WeekdaySale (день недели: 0=пн, 6=вс)
+# melb_df['WeekdaySale'] = melb_df['Date'].dt.dayofweek
+
+# # 1. Создаём функцию get_weekend
+# def get_weekend(weekday):
+#     """
+#     Принимает день недели (0-6)
+#     Возвращает 1, если день выходной (суббота=5 или воскресенье=6), иначе 0
+#     """
+#     if weekday in [5, 6]:
+#         return 1
+#     else:
+#         return 0
+
+# # 2. Применяем функцию к столбцу WeekdaySale
+# melb_df['Weekend'] = melb_df['WeekdaySale'].apply(get_weekend)
+
+# 3. Вычисляем среднюю цену для объектов, проданных в выходные
+# weekend_avg_price = melb_df[melb_df['Weekend'] == 1]['Price'].mean()
+
+# # 4. Округляем до целых
+# weekend_avg_price_rounded = round(weekend_avg_price)
+
+# print(f"Средняя цена объектов, проданных в выходные: ${weekend_avg_price_rounded:,.0f}")
+
+
+# # 1. Находим топ-49 самых популярных компаний
+# top_49 = melb_df['SellerG'].value_counts().nlargest(49).index.tolist()
+
+# # 2. Создаем новый столбец или заменяем значения
+# melb_df['SellerG_clean'] = melb_df['SellerG'].apply(
+#     lambda x: x if x in top_49 else 'other'
+# )
+
+# # 3. Находим минимальную цену для компании 'Nelson'
+# min_price_nelson = melb_df[melb_df['SellerG_clean'] == 'Nelson']['Price'].min()
+
+# # 4. Находим минимальную цену для группы 'other'
+# min_price_other = melb_df[melb_df['SellerG_clean'] == 'other']['Price'].min()
+
+# # 5. Вычисляем соотношение
+# ratio = min_price_nelson / min_price_other
+
+# # 6. Округляем до десятых
+# result = round(ratio, 1)
+
+# print(f"Минимальная цена (Nelson): ${min_price_nelson:,.0f}")
+# print(f"Минимальная цена (other): ${min_price_other:,.0f}")
+# print(f"Соотношение (Nelson / other): {result}")
+
+# Предположим, что ранее в модуле уже были преобразованы другие столбцы 
+# (например, Type, Method, Regionname и т.д.) к типу category,
+# но Suburb остался object.
+
+# Проверяем исходный объём памяти (должно совпасть с 20.5 МБ)
+# memory_before_mb = melb_df.memory_usage(deep=True).sum() / (1024**2)
+# print(f"Память до: {memory_before_mb:.2f} МБ")
+
+# Преобразование Suburb: оставляем 119 самых популярных пригородов
+top_suburbs = melb_df['Suburb'].value_counts().head(119).index
+melb_df['Suburb'] = melb_df['Suburb'].apply(lambda x: x if x in top_suburbs else 'other')
+
+# Приводим к категории
+melb_df['Suburb'] = melb_df['Suburb'].astype('category')
+
+print(melb_df.info())
+
+# После преобразования
+# memory_after_mb = melb_df.memory_usage(deep=True).sum() / (1024**2)
+# print(f"Память после: {memory_after_mb:.2f} МБ")
+
+# Разница
+# diff = memory_before_mb - memory_after_mb
+# print(f"Разница: {diff:.2f} МБ")
+
+
+# # Подсчет продаж в выходные (суббота=5, воскресенье=6)
+# weekend_count = melb_df[melb_df['WeekdaySale'].isin([5, 6])].shape[0]
+
+# print(weekend_count)
+
+# ufo_data = pd.read_csv('https://raw.githubusercontent.com/justmarkham/pandas-videos/master/data/ufo.csv', sep=',')
+# #print(ufo_data)
+# ufo_data['Time'] = pd.to_datetime(ufo_data['Time'], dayfirst=True)
+# print(ufo_data['Time'])
+
+
+# url = 'https://raw.githubusercontent.com/justmarkham/pandas-videos/master/data/ufo.csv'
+# ufo_df = pd.read_csv(url)
+
+# url = 'https://raw.githubusercontent.com/justmarkham/pandas-videos/master/data/ufo.csv'
+# ufo_df = pd.read_csv(url)
+
+# # 2. Преобразуем столбец 'Time' в формат datetime
+# ufo_df['Time'] = pd.to_datetime(ufo_df['Time'])
+
+# # 3. Извлекаем год из даты и создаем новый столбец 'Year'
+# ufo_df['Year'] = ufo_df['Time'].dt.year
+
+# # 4. Считаем количество наблюдений по годам и находим год с максимумом
+# year_counts = ufo_df['Year'].value_counts()
+# max_year = year_counts.idxmax()
+# max_count = year_counts.max()
+
+# # 5. Выводим результат
+# print(f"Год с наибольшим количеством наблюдений: {max_year}")
+# print(f"Количество наблюдений: {max_count}")
+
+# # Дополнительно: выведем топ-5 лет для наглядности
+# print("\nТоп-5 лет по количеству наблюдений:")
+# print(year_counts.head(5))
+
+# # 1. Преобразуем столбец с датой в формат datetime
+# ufo_df['Time'] = pd.to_datetime(ufo_df['Time'])
+
+# # 2. Фильтруем данные: только штат Невада (NV)
+# nevada_df = ufo_df[ufo_df['State'] == 'NV'].copy()
+
+# # 3. Сортируем по времени от старых к новым
+# nevada_df = nevada_df.sort_values('Time')
+
+# # 4. Вычисляем разницу в днях между последовательными наблюдениями
+# nevada_df['Days_Between'] = nevada_df['Time'].diff().dt.days
+
+# # 5. Находим средний интервал (игнорируем первое значение NaN)
+# mean_interval = nevada_df['Days_Between'].mean()
+
+# # 6. Выводим результат, округлив до 2 знаков
+# print(f"Средний интервал между наблюдениями в штате NV: {mean_interval:.2f} дней")
+
+
+
+
+
+# countries_df = pd.DataFrame({
+#     'country': ['Англия', 'Канада', 'США', 'Россия', 'Украина', 'Беларусь', 'Казахстан'],
+#     'population': [56.29, 38.05, 322.28, 146.24, 45.5, 9.5, 17.04],
+#     'area': [133396, 9984670, 9826630, 17125191, 603628, 207600, 2724902]
+# })
+
+# # Расчёт плотности населения (человек на км²)
+# # Переводим население из миллионов в обычные единицы (умножаем на 1_000_000)
+# countries_df['density'] = (countries_df['population'] * 1_000_000) / countries_df['area']
+
+# # Вывод плотности для каждой страны
+# print("Плотность населения (чел/км²):")
+# print(countries_df[['country', 'density']])
+# print()
+
+# # Расчёт среднего значения плотности
+# average_density = countries_df['density'].mean()
+
+# # Округление до сотых
+# result = round(average_density, 2)
+
+# print(f"Средняя плотность населения по всем странам: {result} чел/км²")
+
+

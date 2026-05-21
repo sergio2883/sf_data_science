@@ -1,0 +1,61 @@
+import pandas as pd
+melb_data = pd.read_csv('D:\IDE\github\sf_data_science\PY_17_Pandas_Intro\data\melb_data.csv', sep=',')
+#print(melb_data)
+# print(melb_data.loc[3521,'Landsize']/melb_data.loc[1690,'Landsize'])
+# print(melb_data.loc[1690,'Landsize'])
+#melb_data.loc[15, 'Price']
+# print(melb_data.head())
+# print(melb_data.tail(7))
+# print(melb_data.shape)
+#print(melb_data.info())
+# melb_data['Car'] = melb_data['Car'].astype('int64')
+# melb_data['Bedroom'] = melb_data['Bedroom'].astype('int64')
+# melb_data['Bathroom'] = melb_data['Bathroom'].astype('int64')
+# melb_data['Propertycount'] = melb_data['Propertycount'].astype('int64')
+# melb_data['YearBuilt'] = melb_data['YearBuilt'].astype('int64')
+# print(melb_data.info())
+# print(melb_data.describe().loc[:, ['Distance', 'BuildingArea' , 'Price']])
+#print(melb_data.describe(include=['object']))
+# print(melb_data['Type'].value_counts(normalize=True))
+# print(melb_data['Regionname'].mode())
+# print(melb_data['Propertycount'].max())
+# print(melb_data['Bedroom'].mode())
+# print(melb_data['BuildingArea'].median()/melb_data['BuildingArea'].mean()) 
+
+# BuildingArea_median = melb_data['BuildingArea'].median() 
+# BuildingArea_mean =  melb_data['BuildingArea'].mean()
+# print(abs(BuildingArea_median - BuildingArea_mean)/BuildingArea_mean)
+# print(melb_data[melb_data['Price'] > 2000000])
+# print(melb_data[melb_data['Bathroom'] == 0].shape[0])
+
+# filtered_data = melb_data[(melb_data['SellerG'] == 'Nelson') & (melb_data['Price'] > 3000000)]
+
+# # Подсчет количества
+# count = len(filtered_data)
+# print(f"Количество объектов: {count}")
+
+# print(melb_data[melb_data['BuildingArea'] == 0]['Price'].min())
+
+# filtered_data = melb_data[
+#     (melb_data['Price'] < 1000000) & 
+#     ((melb_data['Rooms'] > 5) | (melb_data['YearBuilt'] > 2015))
+# ]
+
+# # Расчет средней цены
+# average_price = filtered_data['Price'].mean()
+
+# print(f"Средняя цена: {average_price:,.2f}")
+
+filtered_houses = melb_data[
+    (melb_data['Type'] == 'h') & 
+    (melb_data['Price'] < 3000000)
+]
+
+# Подсчет количества объектов по районам
+region_counts = filtered_houses['Regionname'].value_counts()
+most_common_region = region_counts.idxmax()
+count = region_counts.max()
+print(f"Регион с наибольшим числом продаж вилл/коттеджей до $3 млн: {most_common_region}")
+print(f"Количество продаж в этом регионе: {count}")
+print("\nСтатистика по всем регионам:")
+print(region_counts)

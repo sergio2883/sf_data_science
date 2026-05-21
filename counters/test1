@@ -1,0 +1,9 @@
+# Импортируем объект Counter из модуля collections
+
+import numpy as np
+a = np.int8(25)
+print(a)
+# 25
+print(type(a))
+
+print (np.iinfo (int info))

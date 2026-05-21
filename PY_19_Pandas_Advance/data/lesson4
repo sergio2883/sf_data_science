@@ -1,0 +1,83 @@
+import pandas as pd
+# movies = pd.read_csv(r'D:\IDE\github\sf_data_science\PY_19_Pandas_Advance\data\movies.csv', sep=',')
+# ratings1 = pd.read_csv(r'D:\IDE\github\sf_data_science\PY_19_Pandas_Advance\data\ratings1.csv', sep=',')
+# ratings2 = pd.read_csv(r'D:\IDE\github\sf_data_science\PY_19_Pandas_Advance\data\ratings2.csv', sep=',')
+# dates = pd.read_csv(r'D:\IDE\github\sf_data_science\PY_19_Pandas_Advance\data\dates.csv', sep=',')
+
+# unique_movies_count = movies['title'].nunique()
+# print(unique_movies_count)
+
+# unique_users = ratings1['userId'].nunique()
+# print(unique_users)
+
+# dates['date'] = pd.to_datetime(dates['date'])
+# result = dates['date'].dt.year.value_counts().idxmax()
+# print(f"Ответ: {result}")
+
+# ratings = pd.concat(
+#     [ratings1, ratings2],
+#     ignore_index=True
+# )
+# ratings = ratings.drop_duplicates(ignore_index=True)
+# print('Число строк в таблице ratings: ', ratings.shape[0])
+# print(ratings)
+
+# ratings_dates = pd.concat([ratings, dates], axis=1)
+# print(ratings_dates.tail(7))
+
+# joined = ratings_dates.join(
+#     movies.set_index('movieId'),
+#     on='movieId',
+#     how='left'
+# )
+# print(joined.head())
+
+items_df = pd.DataFrame({
+            'item_id': [417283, 849734, 132223, 573943, 19475, 3294095, 382043, 302948, 100132, 312394],
+            'vendor': ['Samsung', 'LG', 'Apple', 'Apple', 'LG', 'Apple', 'Samsung', 'Samsung', 'LG', 'ZTE'],
+            'stock_count': [54, 33, 122, 18, 102, 43, 77, 143, 60, 19]
+        })
+
+purchase_df = pd.DataFrame({
+            'purchase_id': [101, 101, 101, 112, 121, 145, 145, 145, 145, 221],
+            'item_id': [417283, 849734, 132223, 573943, 19475, 3294095, 382043, 302948, 103845, 100132],
+            'price': [13900, 5330, 38200, 49990, 9890, 33000, 67500, 34500, 89900, 11400]
+        })
+
+# # Объединяем (inner join)
+# merged = pd.merge(purchase_df, items_df, on='item_id', how='inner')
+
+# # Сортировка: purchase_id по возрастанию, item_id по убыванию
+# merged = merged.sort_values(['purchase_id', 'item_id'], ascending=[True, False])
+
+# # Сбрасываем индексы
+# merged = merged.reset_index(drop=True)
+
+# # Приводим порядок столбцов
+# merged = merged[['item_id', 'vendor', 'stock_count', 'purchase_id', 'price']]
+
+
+
+# # Приводим порядок столбцов к ожидаемому
+# merged = merged[['item_id', 'vendor', 'stock_count', 'purchase_id', 'price']]
+
+# # Сортируем по purchase_id и item_id (как в ожидаемом ответе)
+# merged = merged.sort_values(['purchase_id', 'item_id']).reset_index(drop=True)
+
+
+# Приведение к числовому типу (на всякий случай)
+merged = pd.merge(purchase_df, items_df, on='item_id', how='inner')
+
+# Сортируем ТОЛЬКО по purchase_id, сохраняя исходный порядок item_id внутри группы
+merged = merged.sort_values('purchase_id').reset_index(drop=True)
+
+merged = merged[['item_id', 'vendor', 'stock_count', 'purchase_id', 'price']]
+
+print(merged)
+
+# Теперь считаем выручку (для второго пункта задания)
+# Берём уникальные item_id, так как иначе товары с несколькими покупками учтутся несколько раз
+income = (merged.drop_duplicates('item_id')['stock_count'] * 
+          merged.drop_duplicates('item_id')['price']).sum()
+
+print(f"\nincome = {income}")

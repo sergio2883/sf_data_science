@@ -1,0 +1,229 @@
+import pandas as pd
+
+# Простой способ — если весь файл в таком же формате
+df = pd.read_csv(r'D:\IDE\github\sf_data_science\PY_17_Pandas_Intro\data\citibike-tripdata.csv',
+                 skiprows=0,
+                 header=None,
+                 engine='python')
+
+# Разбиваем первую (и единственную) колонку по запятой
+df = df[0].str.split(',', expand=True)
+
+# Первая строка становится заголовками
+df.columns = df.iloc[0]
+df = df[1:].reset_index(drop=True)
+
+# Конвертируем нужные колонки в числа (если есть точки)
+df['start station id'] = pd.to_numeric(df['start station id'], errors='coerce')
+
+#Считаем пропуски
+print(f"Пропусков в 'start station id': {df['start station id'].isnull().sum()}")
+print(f"Всего строк: {len(df)}")
+
+print(df[['starttime', 'stoptime']].dtypes)
+
+most_popular_id = df['start station id'].mode()[0]  # mode() возвращает Series, берем первый элемент
+
+# Выводим результат в виде целого числа
+print(f"Идентификатор самой популярной стартовой стоянки: {int(most_popular_id)}")
+
+# Конвертируем bikeid в число
+df['bikeid'] = pd.to_numeric(df['bikeid'], errors='coerce')
+
+# Находим самый популярный велосипед
+most_popular_bike = df['bikeid'].mode()[0]
+
+# Выводим результат
+print(f"Идентификатор самого популярного велосипеда: {int(most_popular_bike)}")
+
+# Считаем количество клиентов каждого типа
+user_counts = df['usertype'].value_counts()
+
+print("Распределение клиентов:")
+print(user_counts)
+
+# Находим преобладающий тип и его количество
+dominant_type = user_counts.index[0]  # 'Subscriber' или 'Customer'
+dominant_count = user_counts.values[0]
+total_count = len(df)
+
+# Вычисляем долю
+dominant_share = dominant_count / total_count
+
+# Округляем до сотых
+dominant_share_rounded = round(dominant_share, 2)
+
+print(f"\nПреобладающий тип: {dominant_type}")
+print(f"Количество: {dominant_count}")
+print(f"Общее количество: {total_count}")
+print(f"Доля преобладающего типа: {dominant_share_rounded}")
+
+# Конвертируем gender в число (1 = мужчина, 2 = женщина)
+df['gender'] = pd.to_numeric(df['gender'], errors='coerce')
+
+# Считаем количество поездок для мужчин и женщин
+gender_counts = df['gender'].value_counts()
+
+print("Распределение по гендеру:")
+print(f"Мужчины (1): {gender_counts.get(1, 0)}")
+print(f"Женщины (2): {gender_counts.get(2, 0)}")
+
+# Находим группу с большим количеством поездок
+if gender_counts.get(1, 0) > gender_counts.get(2, 0):
+    result = gender_counts.get(1, 0)
+    print(f"\nМужчин больше. Ответ: {result}")
+elif gender_counts.get(2, 0) > gender_counts.get(1, 0):
+    result = gender_counts.get(2, 0)
+    print(f"\nЖенщин больше. Ответ: {result}")
+else:
+    result = gender_counts.get(1, 0)
+    print(f"\nПоровну. Ответ: {result}")
+    
+# Конвертируем нужные столбцы в числа
+df['start station id'] = pd.to_numeric(df['start station id'], errors='coerce')
+df['end station id'] = pd.to_numeric(df['end station id'], errors='coerce')
+df['birth year'] = pd.to_numeric(df['birth year'], errors='coerce')
+
+print("=== ПРОВЕРКА УТВЕРЖДЕНИЙ ===\n")
+
+# ===== Утверждение A =====
+unique_start = df['start station id'].nunique()
+unique_end = df['end station id'].nunique()
+print(f"A. Число уникальных стартовых стоянок: {unique_start}")
+print(f"   Число уникальных конечных стоянок: {unique_end}")
+print(f"   Они {'не равны' if unique_start != unique_end else 'равны'} друг другу")
+print(f"   Утверждение A: {'ВЕРНО' if unique_start != unique_end else 'НЕВЕРНО'}\n")
+
+# ===== Утверждение B =====
+# Предполагаем, что год анализа 2018 (из примера)
+current_year = 2018
+df['age'] = current_year - df['birth year']
+min_age = df['age'].min()
+print(f"B. Минимальный возраст клиента: {min_age} лет (если год данных 2018)")
+print(f"   Утверждение B: {'ВЕРНО' if min_age == 10 else 'НЕВЕРНО'}\n")
+
+# ===== Утверждение C =====
+# Находим самую непопулярную стартовую стоянку
+start_counts = df['start station name'].value_counts()
+least_popular_start = start_counts.index[-1] if len(start_counts) > 0 else None
+least_popular_count = start_counts.values[-1] if len(start_counts) > 0 else 0
+print(f"C. Самая непопулярная стартовая стоянка: '{least_popular_start}'")
+print(f"   Количество поездок: {least_popular_count}")
+print(f"   Утверждение C: {'ВЕРНО' if least_popular_start == 'Eastern Pkwy & Washington Ave' else 'НЕВЕРНО'}\n")
+
+# ===== Утверждение D =====
+# Находим стоянку с наибольшим количеством завершенных поездок
+end_counts = df['end station name'].value_counts()
+most_popular_end = end_counts.index[0] if len(end_counts) > 0 else None
+most_popular_end_count = end_counts.values[0] if len(end_counts) > 0 else 0
+print(f"D. Наибольшее количество поездок завершается на стоянке: '{most_popular_end}'")
+print(f"   Количество поездок: {most_popular_end_count}")
+print(f"   Утверждение D: {'ВЕРНО' if most_popular_end == 'Liberty Light Rail' else 'НЕВЕРНО'}")
+
+# ===== ИТОГ =====
+print("\n=== ИТОГ: ВЕРНЫЕ УТВЕРЖДЕНИЯ ===")
+if unique_start != unique_end:
+    print("A")
+if min_age == 10:
+    print("B")
+if least_popular_start == 'Eastern Pkwy & Washington Ave':
+    print("C")
+if most_popular_end == 'Liberty Light Rail':
+    print("D")
+    
+print(f"Исходное количество столбцов: {len(df.columns)}")
+print(f"Столбцы до удаления: {df.columns.tolist()}")
+
+# Удаляем столбцы с идентификаторами стоянок
+df_cleaned = df.drop(columns=['start station id', 'end station id', 'age'])
+
+print(f"\nКоличество столбцов после удаления: {len(df_cleaned.columns)}")
+print(f"Столбцы после удаления: {df_cleaned.columns.tolist()}")
+
+print(f"\nОтвет: {len(df_cleaned.columns)} столбцов осталось")
+
+df['birth year'] = pd.to_numeric(df['birth year'], errors='coerce')
+
+# Создаём столбец age (2018 - год рождения)
+df['age'] = 2018 - df['birth year']
+
+# Удаляем столбец birth year
+df = df.drop(columns=['birth year'])
+
+# Считаем количество поездок клиентов старше 60 лет
+rides_over_60 = df[df['age'] > 60].shape[0]
+
+print(f"Количество поездок клиентов старше 60 лет: {rides_over_60}")
+
+# Конвертируем starttime и stoptime в datetime
+df['starttime'] = pd.to_datetime(df['starttime'])
+df['stoptime'] = pd.to_datetime(df['stoptime'])
+
+# Создаём признак длительности поездки (в секундах)
+df['trip_duration'] = (df['stoptime'] - df['starttime']).dt.total_seconds()
+
+# Находим длительность поездки под индексом 3
+duration_seconds = df.loc[3, 'trip_duration']
+duration_minutes = int(duration_seconds // 60)  # целое количество минут
+
+print(f"Длительность поездки под индексом 3:")
+print(f"  В секундах: {duration_seconds}")
+print(f"  В целых минутах: {duration_minutes}")
+
+print(f"\nОтвет: {duration_minutes} минут(ы)")
+
+# Конвертируем starttime в datetime
+df['starttime'] = pd.to_datetime(df['starttime'])
+
+# Создаём признак weekend (1 - выходной, 0 - будни)
+# dayofweek: Monday=0, Tuesday=1, Wednesday=2, Thursday=3, Friday=4, Saturday=5, Sunday=6
+df['weekend'] = df['starttime'].dt.dayofweek.isin([5, 6]).astype(int)
+
+# Считаем количество поездок в выходные
+weekend_rides = df['weekend'].sum()
+
+print(f"Количество поездок, начавшихся в выходные: {weekend_rides}")
+print(f"Всего поездок: {len(df)}")
+print(f"Доля выходных поездок: {weekend_rides / len(df) * 100:.1f}%")
+
+# Извлекаем час начала поездки
+df['hour'] = df['starttime'].dt.hour
+
+# Создаём признак time_of_day
+def get_time_of_day(hour):
+    if 0 <= hour <= 6:
+        return 'night'
+    elif 6 < hour <= 12:
+        return 'morning'
+    elif 12 < hour <= 18:
+        return 'day'
+    elif 18 < hour <= 23:
+        return 'evening'
+    else:
+        return 'unknown'  # на случай некорректных данных
+
+df['time_of_day'] = df['hour'].apply(get_time_of_day)
+
+# Считаем количество поездок для каждого времени суток
+time_counts = df['time_of_day'].value_counts()
+
+print("Количество поездок по времени суток:")
+print(time_counts)
+
+# Получаем количество дневных и ночных поездок
+day_rides = time_counts.get('day', 0)
+night_rides = time_counts.get('night', 0)
+
+# Вычисляем, во сколько раз дневных больше
+if night_rides > 0:
+    ratio = day_rides / night_rides
+else:
+    ratio = float('inf')
+
+# Округляем до целых
+ratio_rounded = round(ratio)
+
+print(f"\nДневных поездок: {day_rides}")
+print(f"Ночных поездок: {night_rides}")
+print(f"Во сколько раз дневных больше: {ratio:.2f}")
+print(f"Ответ (округлённый до целых): {ratio_rounded}")

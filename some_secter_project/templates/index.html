@@ -1,0 +1,4 @@
+async def process_login_form(request):
+    data = await request.post()
+    login = data['login']
+    password = data['password']

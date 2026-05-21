@@ -1,0 +1,80 @@
+import pandas as pd
+df = pd.read_csv('D:\IDE\github\sf_data_science\PY_17_Pandas_Intro\data\students_performance.csv', sep=',')
+# print(student_data)
+# print(student_data.loc[155,'writing score'])
+# print(student_data.info())
+# print(student_data['math score'].mean())
+# print(student_data['race/ethnicity'].mode())
+
+# test_course = student_data['test preparation course'] == 'completed'
+# mean_score = student_data[ 'reading score'].mean()
+
+
+# Фильтрация студентов, посещавших курсы
+# prepared = student_data[student_data['test preparation course'] == 'completed']
+# # Средний балл по чтению
+# average_reading = prepared['reading score'].mean()
+# result = round(average_reading)
+# print(result)
+
+# standard_math = df[df['lunch'] == 'standard']['math score'].mean()
+
+# # Средний балл по математике для группы с льготным питанием
+# free_math = df[df['lunch'] == 'free/reduced']['math score'].mean()
+
+# print(f"Средний балл по математике (оплачиваемое питание): {standard_math:.2f}")
+# print(f"Средний балл по математике (льготное питание): {free_math:.2f}")
+# print(f"\nНаибольший средний балл: {max(standard_math, free_math):.2f}")
+
+# # Проверка гипотезы
+# if standard_math > free_math:
+#     print("Гипотеза подтверждена: оплачиваемое питание -> выше балл")
+# else:
+#     print("Гипотеза не подтверждена")
+    
+# Подсчет количества студентов, чьи родители имеют степень бакалавра
+# bachelor_count = df[df['parental level of education'] == "bachelor's degree"].shape[0]
+
+# # Общее количество студентов
+# total_count = df.shape[0]
+
+# # Процент
+# percentage = (bachelor_count / total_count) * 100
+
+# print(f"Количество студентов с родителями-бакалаврами: {bachelor_count}")
+# print(f"Общее количество студентов: {total_count}")
+# print(f"Процент: {percentage:.2f}%")
+
+median_group_A = df[df['race/ethnicity'] == 'group A']['writing score'].median()
+
+# Средний балл по письму для группы C
+mean_group_C = df[df['race/ethnicity'] == 'group C']['writing score'].mean()
+
+# Разница (в абсолютных величинах или со знаком)
+difference = median_group_A - mean_group_C
+
+print(f"Медианный балл по письму (группа A): {median_group_A:.2f}")
+print(f"Средний балл по письму (группа C): {mean_group_C:.2f}")
+print(f"Разница (медиана A - среднее C): {difference:.2f}")
+print(f"Абсолютная разница: {abs(difference):.2f}")
+
+# math = student_data[student_data['math score'] == 0].shape[0]
+# #print(melb_data[melb_data['Bathroom'] == 0].shape[0])
+# print(prepared)
+# print(average_reading)
+# summary = [(prepared) & (average_reading)]
+# filtered_data = melb_data[(melb_data['SellerG'] == 'Nelson') & (melb_data['Price'] > 3000000)]
+
+# Средний балл по чтению
+#average_reading = prepared['reading score'].mean()
+
+# Округление до целого
+#result = round(average_reading)
+
+#print (prepared)
+#print(f"Средний балл по чтению: {average_reading:.2f}")
+
+#print(f"Округленный результат: {result}")
+
+# print(test_course)
+# print(mean_score)
