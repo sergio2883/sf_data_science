@@ -1,16 +1,16 @@
 # Проект: Анализ резюме из HeadHunter
 
 ## Оглавление
- [1. Описание проекта](https://github.com/sergio2883/sf_data_science/tree/main/PY_22_HH_Project/README.md#Описание-проекта) 
- [2. Структура файлов](https://github.com/sergio2883/sf_data_science/tree/main/PY_22_HH_Project/README.md#Какой-кейс-решаем)
- [3. Состав проекта](https://github.com/sergio2883/sf_data_science/tree/main/PY_22_HH_Project/README.md#Результат)
- [4. Итоговые выводы](https://github.com/sergio2883/sf_data_science/tree/main/PY_22_HH_Project/README.md#Результат)
+ [1. Описание проекта](https://github.com/sergio2883/sf_data_science/tree/main/HH_Project/README.md#Описание-проекта) 
+ [2. Структура файлов](https://github.com/sergio2883/sf_data_science/tree/main/HH_Project/README.md#Какой-кейс-решаем)
+ [3. Состав проекта](https://github.com/sergio2883/sf_data_science/tree/main/HH_Project/README.md#Результат)
+ [4. Итоговые выводы](https://github.com/sergio2883/sf_data_science/tree/main/HH_Project/README.md#Результат)
 
 
 ## Описание проекта
 Данный проект посвящён анализу данных о соискателях с использованием набора данных, содержащего информацию о резюме пользователей с платформы [HeadHunter](https://hh.ru). Цель исследования — компания HeadHunter хочет построить модель, которая бы автоматически определяла примерный уровень заработной платы, подходящей пользователю, исходя из информации, которую он указал о себе. По результам выполнения каждого пункта исследования проведен анализ и сделаны выводы. 
 
-:arrow_up:[к оглавлению](https://github.com/sergio2883/sf_data_science/tree/main/PY_22_HH_Project/README.md#Оглавление)
+:arrow_up:[к оглавлению](https://github.com/sergio2883/sf_data_science/tree/main/HH_Project/README.md#Оглавление)
 
 ## Структура файлов
 
@@ -19,11 +19,11 @@
 | `data\hh_database.csv` | Исходный файл с резюме, размещен по [ссылке](https://disk.yandex.ru/d/T5fWfeyCB4Goew). |
 | `data\ExchangeRates.csv` | Курсы валют для расчетов |
 | `\plotly\` | HTML-страницы с диаграммами (т.к. отсутствует возможность визуализации диграмма Plotly на GitHub |
-| `Project-1. Ноутбук-шаблон_fin.ipynb` | Задание в формате Jupyter Notebook. [Открыть](/PY_22_HH_Project/Project-1.%20Ноутбук-шаблон_fin.ipynb) |
+| `Project-1. Ноутбук-шаблон_fin.ipynb` | Задание в формате Jupyter Notebook. [Открыть](/HH_Project/Project-1.%20Ноутбук-шаблон_fin.ipynb) |
 | `requirements.txt` | Версии модулей |
 | `README.md` | Текущий файл с описанием проекта |
 
-:arrow_up:[к оглавлению](https://github.com/sergio2883/sf_data_science/tree/main/PY_22_HH_Project/README.md#Оглавление)
+:arrow_up:[к оглавлению](https://github.com/sergio2883/sf_data_science/tree/main/HH_Project/README.md#Оглавление)
 
 ---
 
@@ -37,6 +37,6 @@
 ## Итоговые результаты и выводы
 Проект помог изучить способы и методы анализа данных, попрактиковаться в пребразовании и очистке данных. Результаты работы над проектом позволили выявить зависимости от различных параметров и подготовить данные для использования в моделировании задач для машинного обучения.
 
-:arrow_up:[к оглавлению](https://github.com/sergio2883/sf_data_science/tree/main/PY_22_HH_Project/README.md#Оглавление)
+:arrow_up:[к оглавлению](https://github.com/sergio2883/sf_data_science/tree/main/HH_Project/README.md#Оглавление)
 
 ---
