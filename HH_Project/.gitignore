@@ -1,0 +1,13 @@
+# Данные (большие файлы)
+data/hh_database.csv
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+__pycache__/
+
+# Виртуальное окружение
+venv/
+env/
+.venv/
+.env/
