@@ -19,7 +19,7 @@
 |------|----------|
 | `data\hh_database.csv` | Исходный файл с резюме, размещен по [ссылке](https://disk.yandex.ru/d/T5fWfeyCB4Goew). |
 | `data\ExchangeRates.csv` | Курсы валют для расчетов |
-| `\plotly\` | HTML-страницы с диаграммами (т.к. отсутствует возможность визуализации диграмма Plotly на GitHub |
+| `\plotly\` | HTML-страницы с диаграммами |
 | `Project-1. Ноутбук-шаблон_fin.ipynb` | Задание в формате Jupyter Notebook. [Открыть](/HH_Project/Project-1.%20Ноутбук-шаблон_fin.ipynb) |
 | `requirements.txt` | Версии модулей |
 | `README.md` | Текущий файл с описанием проекта |
