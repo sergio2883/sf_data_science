@@ -4,7 +4,7 @@
  [1. Описание проекта](https://github.com/sergio2883/sf_data_science/tree/main/HH_Project/README.md#Описание-проекта) 
  [2. Структура файлов](https://github.com/sergio2883/sf_data_science/tree/main/HH_Project/README.md#Структура-файлов)
  [3. Состав проекта](https://github.com/sergio2883/sf_data_science/tree/main/HH_Project/README.md#Состав-проекта)
- [4. Итоговые выводы](https://github.com/sergio2883/sf_data_science/tree/main/HH_Project/README.md#Итоговые-результаты-и-выводы)
+ [4. Итоговые результаты и выводы](https://github.com/sergio2883/sf_data_science/tree/main/HH_Project/README.md#Итоговые-результаты-и-выводы)
 
 
 ## Описание проекта
