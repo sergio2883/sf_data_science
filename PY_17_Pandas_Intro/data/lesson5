@@ -1,5 +1,0 @@
-import pandas as pd
-countries_data = pd.read_csv('D:\IDE\github\sf_data_science\PY_17_Pandas_Intro\data\countries.csv', sep=';')
-#countries_data = pd.read_csv('countries.csv', sep=';')
-#display(countries_data)
-print(countries_data)
