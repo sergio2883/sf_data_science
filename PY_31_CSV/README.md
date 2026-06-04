@@ -46,6 +46,7 @@
 **Требования:**
 - Python 3.8 или выше
 - pip (менеджер пакетов Python)
+- должны быть установлены пакеты и модули: streamlit, pandas, numpy, matplotlib, seaborn, python-dateutil, datetime, io, warnings
 
 **Запуск в терминале:** 
 streamlit run .\data_analyse_2.py
