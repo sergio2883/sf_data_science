@@ -48,7 +48,7 @@
 - pip (менеджер пакетов Python)
 
 #### Запуск в терминале
-streamlit run app.py
+streamlit run .\data_analyse_2.py
 
 ##### После запуска:
 Откроется браузер с приложением (обычно http://localhost:8501)
